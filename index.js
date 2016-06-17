@@ -8,9 +8,10 @@ fs.readdir('./samples', function(err, files){
     fs.readFile('./samples/' + fileName, function(err, code) {
       if(err) throw err;
       var ast = esprima.parse(code);
-      fs.writeFile('./ast/' + fileName, util.inspect(ast, { depth: null }), function(err) {
+      var outPath = ('./ast/' + fileName).replace(/.js/, '.ast.js');
+      fs.writeFile(outPath, util.inspect(ast, { depth: null }), function(err) {
         if(err) throw err;
-        console.log('./ast/' + fileName);
+        console.log(outPath);
       });
     });
   });
